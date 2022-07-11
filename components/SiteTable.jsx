@@ -17,18 +17,18 @@ const SiteTable = ({ sites }) => {
         </Tr>
       </thead>
       <tbody>
-        {sites.map(({ id, data }) => (
-          <Box as='tr' key={data.url}>
-            <Td fontWeight='medium'>{data.name}</Td>
-            <Td>{data.url}</Td>
+        {sites.map(site => (
+          <Box as='tr' key={site.url}>
+            <Td fontWeight='medium'>{site.name}</Td>
+            <Td>{site.url}</Td>
             <Td>
-              <NextLink href='/p/[siteId]' passHref as={`/p/${id}`}>
+              <NextLink href='/p/[siteId]' passHref as={`/p/${site.id}`}>
                 <Link color='blue.500' fontWeight='medium'>
                   View Feedback
                 </Link>
               </NextLink>
             </Td>
-            <Td>{format(parseISO(data.createdAt), 'PPpp')}</Td>
+            <Td>{format(parseISO(site.createdAt), 'PPpp')}</Td>
           </Box>
         ))}
       </tbody>

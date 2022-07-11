@@ -5,12 +5,12 @@ import SiteTableSkeleton from '@components/SiteTableSkeleton';
 import DashboardShell from '@components/DashboardShell';
 import EmptyState from '@components/EmptyState';
 import SiteTable from '@components/SiteTable';
-import { fetcher } from '@lib/fetcher';
 import { useAuth } from '@lib/auth';
+import fetcher from '@lib/fetcher';
 
 const dashboard = () => {
-  const auth = useAuth();
-  const { data } = useSWR('/api/sites', fetcher);
+  const { user } = useAuth();
+  const { data } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
   if (!data)
     return (
       <DashboardShell>
@@ -20,7 +20,11 @@ const dashboard = () => {
 
   return (
     <DashboardShell>
-      {data.sites ? <SiteTable sites={data.sites} /> : <EmptyState />}
+      {data.sites.length !== 0 ? (
+        <SiteTable sites={data.sites} />
+      ) : (
+        <EmptyState />
+      )}
     </DashboardShell>
   );
 };

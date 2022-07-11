@@ -14,6 +14,7 @@ export const getStaticProps = async ctx => {
     props: {
       comments,
     },
+    revalidate: 1,
   };
 };
 
@@ -32,14 +33,13 @@ const SiteComments = ({ comments }) => {
   const router = useRouter();
   const inputEl = useRef(null);
   const [allComments, setAllComments] = useState(comments);
-
   const onSubmit = e => {
     e.preventDefault();
     const newComment = {
-      author: auth.user.displayName,
+      author: auth.user.name,
       authorId: auth.user.uid,
       createdAt: new Date().toISOString(),
-      provider: auth.user.providerData[0].providerId,
+      provider: auth.user.provider,
       siteId: router.query.siteId,
       status: 'PENDING',
       text: inputEl.current.value,
