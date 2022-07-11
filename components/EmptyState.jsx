@@ -14,9 +14,9 @@ const EmptyState = () => {
       direction='column'
     >
       <Heading size='lg' mb={2}>
-        You haven't added any sites.
+        You haven&apos;t added any sites.
       </Heading>
-      <Text mb={4}>Welcome, let's get started</Text>
+      <Text mb={4}>Welcome, let&apos;s get started</Text>
       <AddSiteModal>Add your first site</AddSiteModal>
     </Flex>
   );

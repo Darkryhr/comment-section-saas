@@ -8,7 +8,7 @@ import SiteTable from '@components/SiteTable';
 import { useAuth } from '@lib/auth';
 import fetcher from '@lib/fetcher';
 
-const dashboard = () => {
+const Dashboard = () => {
   const { user } = useAuth();
   const { data } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
   if (!data)
@@ -29,4 +29,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
